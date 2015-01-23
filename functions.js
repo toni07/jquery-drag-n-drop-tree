@@ -79,7 +79,7 @@ getHashData: function(){
 		var elemToManage = dtpUtil.draggedElement.elem;
 		var isNewElement = dtpUtil.draggedElement.isNew;
 		if(isNewElement){
-			newElem = $(elemToManage).clone();
+			newElem = $(elemToManage).clone(true);
 			var newDiv = $('<div>');
 			newDiv.addClass('drop-between-elements');
 			newDiv.on('dragover', function(event){
@@ -375,12 +375,14 @@ getHashData: function(){
 			var childrenUl = $(childDiv).children('ul');
 			console.log('##childrenLi', childrenLi);
 			$.each(childrenLi, function(it, elem){
+				elem = $(elem);
+				var idElem = elem.attr('data-id');
 				var newInput = $('<input>');
 				newInput.attr('type', 'hidden');
 				newInput.attr('name', 'toto');
-				newInput.attr('value', level + '_' + $(elem).text());
+				newInput.attr('value', level + '_' + idElem + '_' + elem.text());
 				$(elem).append(newInput);
-				console.log('##append', elem, dtpUtil.randomFromInterval(0, 10000), level);
+				//console.log('##append', elem, dtpUtil.randomFromInterval(0, 10000), level);
 				//dtpUtil.parseNewElement(elem, level);
 			});
 			$.each(childrenUl, function(it, elem){
